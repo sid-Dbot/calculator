@@ -9,8 +9,13 @@ class Myapp extends StatelessWidget {
     return MaterialApp(
       title: 'calculator',
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.brown),
-          textTheme: TextTheme(button: TextStyle(fontSize: 20))),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.lime,
+        ),
+        textTheme: TextTheme(
+          button: TextStyle(fontSize: 20),
+        ),
+      ),
       home: Calculator(),
     );
   }
@@ -195,7 +200,7 @@ class _CalculatorState extends State<Calculator> {
                           side: BorderSide(color: Colors.black)),
                       onPressed: multiply,
                       child: Text(
-                        '*',
+                        'X',
                         style: TextStyle(fontSize: 20),
                       )),
                 ],
@@ -252,8 +257,7 @@ class _CalculatorState extends State<Calculator> {
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.cyan,
-                      primary: Colors.pink,
+                      backgroundColor: Colors.lightGreen,
                       shape: StadiumBorder(),
                     ),
                     onPressed: submit,
