@@ -10,7 +10,7 @@ class Myapp extends StatelessWidget {
       title: 'calculator',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.lime,
+          primarySwatch: Colors.teal,
         ),
         textTheme: TextTheme(
           button: TextStyle(fontSize: 20),
@@ -32,6 +32,22 @@ class _CalculatorState extends State<Calculator> {
   String n1 = '', n2 = '';
   num _c = 0, a = 5, b = 6;
   String _o = ' ';
+  bool _operatorChoosen = false;
+
+  void chooseOperator(String l) {
+    _operatorChoosen = true;
+    setState(() {
+      _o = l;
+    });
+  }
+
+  void numbuilder(String k) {
+    _operatorChoosen ? n1 += k : n2 += k;
+    setState(() {
+      if (_operatorChoosen == false) a = int.parse(n1);
+      b = int.parse(n2);
+    });
+  }
 
   void add() {
     setState(() {
@@ -65,15 +81,18 @@ class _CalculatorState extends State<Calculator> {
     setState(() {
       _c = 0;
       _o = "";
+      n1 = '';
+      a = 0;
+      b = 0;
     });
   }
 
-  void submit() {
-    setState(() {
-      a = int.parse(n1);
-      b = int.parse(num2.text);
-    });
-  }
+  // void submit() {
+  //   setState(() {
+  //     a = int.parse(n1);
+  //     b = int.parse(num2.text);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -104,17 +123,19 @@ class _CalculatorState extends State<Calculator> {
                   ],
                 ),
               ),
-              TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Enter a number',
-                  ),
-                  onChanged: (value) => n1 = value
-                  //controller: num1,
-                  ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Enter another number'),
-                controller: num2,
-              ),
+              // TextField(
+              //     decoration: InputDecoration(
+              //       labelText: 'Enter a number',
+              //     ),
+              //     onChanged: (value) => n1 = value
+              //     //controller: num1,
+              //     ),
+              // TextField(
+              //   decoration: InputDecoration(labelText: 'Enter another number'),
+              //   controller: num2,
+              // ),
+
+              //------------------------NUMBER KEYS------------------------------
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -131,7 +152,7 @@ class _CalculatorState extends State<Calculator> {
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: add,
+                      onPressed: () => chooseOperator('+'),
                       child: Icon(Icons.add)),
                 ],
               ),
@@ -143,27 +164,27 @@ class _CalculatorState extends State<Calculator> {
                       elevation: 9,
                     ),
                     child: Text('1'),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('1'),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       elevation: 9,
                     ),
                     child: Text('2'),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('2'),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       elevation: 9,
                     ),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('3'),
                     child: Text('3'),
                   ),
                   OutlinedButton(
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(side: BorderSide(width: 10)),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: subtract,
+                      onPressed: () => chooseOperator('-'),
                       child: Text(
                         "-",
                         style: TextStyle(fontSize: 20),
@@ -177,34 +198,35 @@ class _CalculatorState extends State<Calculator> {
                     style: TextButton.styleFrom(
                       elevation: 9,
                     ),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('4'),
                     child: Text('4'),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       elevation: 9,
                     ),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('5'),
                     child: Text('5'),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       elevation: 9,
                     ),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('6'),
                     child: Text('6'),
                   ),
                   OutlinedButton(
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: multiply,
+                      onPressed: () => chooseOperator('X'),
                       child: Text(
                         'X',
                         style: TextStyle(fontSize: 20),
                       )),
                 ],
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -212,28 +234,28 @@ class _CalculatorState extends State<Calculator> {
                     style: TextButton.styleFrom(
                       elevation: 9,
                     ),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('7'),
                     child: Text('7'),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       elevation: 9,
                     ),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('8'),
                     child: Text('8'),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       elevation: 9,
                     ),
-                    onPressed: () {},
+                    onPressed: () => numbuilder('9'),
                     child: Text('9'),
                   ),
                   OutlinedButton(
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: divide,
+                      onPressed: () => chooseOperator("/"),
                       child: Text('/', style: TextStyle(fontSize: 20))),
                 ],
               ),
@@ -260,7 +282,7 @@ class _CalculatorState extends State<Calculator> {
                       backgroundColor: Colors.lightGreen,
                       shape: StadiumBorder(),
                     ),
-                    onPressed: submit,
+                    onPressed: () {},
                     child: Text(
                       '=',
                       style: TextStyle(fontSize: 30),
