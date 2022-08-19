@@ -104,198 +104,201 @@ class _CalculatorState extends State<Calculator> {
     return Scaffold(
         appBar: AppBar(title: Text('Calculator')),
         body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Card(
-                elevation: 7,
-                child: Row(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Card(
+                  elevation: 7,
+                  child: Row(
+                    //crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Card(
+                        child: Text('$a'),
+                      ),
+                      Card(
+                        child: Text('$_o'),
+                      ),
+                      Card(
+                        child: Text('$b'),
+                      ),
+                      Container(
+                        child: Text(' =  $_c'),
+                      ),
+                    ],
+                  ),
+                ),
+                // TextField(
+                //     decoration: InputDecoration(
+                //       labelText: 'Enter a number',
+                //     ),
+                //     onChanged: (value) => n1 = value
+                //     //controller: num1,
+                //     ),
+                // TextField(
+                //   decoration: InputDecoration(labelText: 'Enter another number'),
+                //   controller: num2,
+                // ),
+
+                //------------------------NUMBER KEYS------------------------------
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Card(
-                      child: Text('$a'),
-                    ),
-                    Card(
-                      child: Text('$_o'),
-                    ),
-                    Card(
-                      child: Text('$b'),
-                    ),
                     Container(
-                      child: Text(' =  $_c'),
+                      width: 200,
+                      child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: Colors.black),
+                          ),
+                          onPressed: clear,
+                          child: Text('Clear')),
                     ),
+                    OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            side: BorderSide(color: Colors.black)),
+                        onPressed: () => add(),
+                        child: Icon(Icons.add)),
                   ],
                 ),
-              ),
-              // TextField(
-              //     decoration: InputDecoration(
-              //       labelText: 'Enter a number',
-              //     ),
-              //     onChanged: (value) => n1 = value
-              //     //controller: num1,
-              //     ),
-              // TextField(
-              //   decoration: InputDecoration(labelText: 'Enter another number'),
-              //   controller: num2,
-              // ),
-
-              //------------------------NUMBER KEYS------------------------------
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: 200,
-                    child: OutlinedButton(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      child: Text('1'),
+                      onPressed: () => numbuilder('1'),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      child: Text('2'),
+                      onPressed: () => numbuilder('2'),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      onPressed: () => numbuilder('3'),
+                      child: Text('3'),
+                    ),
+                    OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: Colors.black),
-                        ),
-                        onPressed: clear,
-                        child: Text('Clear')),
-                  ),
-                  OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          shape: StadiumBorder(),
-                          side: BorderSide(color: Colors.black)),
-                      onPressed: () => add(),
-                      child: Icon(Icons.add)),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
+                            shape: StadiumBorder(side: BorderSide(width: 10)),
+                            side: BorderSide(color: Colors.black)),
+                        onPressed: () => subtract(),
+                        child: Text(
+                          "-",
+                          style: TextStyle(fontSize: 20),
+                        )),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      onPressed: () => numbuilder('4'),
+                      child: Text('4'),
                     ),
-                    child: Text('1'),
-                    onPressed: () => numbuilder('1'),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      onPressed: () => numbuilder('5'),
+                      child: Text('5'),
                     ),
-                    child: Text('2'),
-                    onPressed: () => numbuilder('2'),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      onPressed: () => numbuilder('6'),
+                      child: Text('6'),
                     ),
-                    onPressed: () => numbuilder('3'),
-                    child: Text('3'),
-                  ),
-                  OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          shape: StadiumBorder(side: BorderSide(width: 10)),
-                          side: BorderSide(color: Colors.black)),
-                      onPressed: () => subtract(),
-                      child: Text(
-                        "-",
-                        style: TextStyle(fontSize: 20),
-                      )),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
-                    ),
-                    onPressed: () => numbuilder('4'),
-                    child: Text('4'),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
-                    ),
-                    onPressed: () => numbuilder('5'),
-                    child: Text('5'),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
-                    ),
-                    onPressed: () => numbuilder('6'),
-                    child: Text('6'),
-                  ),
-                  OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          shape: StadiumBorder(),
-                          side: BorderSide(color: Colors.black)),
-                      onPressed: () => multiply(),
-                      child: Text(
-                        'X',
-                        style: TextStyle(fontSize: 20),
-                      )),
-                ],
-              ),
+                    OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            side: BorderSide(color: Colors.black)),
+                        onPressed: () => multiply(),
+                        child: Text(
+                          'X',
+                          style: TextStyle(fontSize: 20),
+                        )),
+                  ],
+                ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      onPressed: () => numbuilder('7'),
+                      child: Text('7'),
                     ),
-                    onPressed: () => numbuilder('7'),
-                    child: Text('7'),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      onPressed: () => numbuilder('8'),
+                      child: Text('8'),
                     ),
-                    onPressed: () => numbuilder('8'),
-                    child: Text('8'),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      elevation: 9,
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        elevation: 9,
+                      ),
+                      onPressed: () => numbuilder('9'),
+                      child: Text('9'),
                     ),
-                    onPressed: () => numbuilder('9'),
-                    child: Text('9'),
-                  ),
-                  OutlinedButton(
+                    OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            side: BorderSide(color: Colors.black)),
+                        onPressed: () => divide(),
+                        child: Text('/', style: TextStyle(fontSize: 20))),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 150,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text('0'),
+                        style: ButtonStyle(),
+                      ),
+                    ),
+                    OutlinedButton(
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: () => divide(),
-                      child: Text('/', style: TextStyle(fontSize: 20))),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: 150,
-                    child: ElevatedButton(
                       onPressed: () {},
-                      child: Text('0'),
-                      style: ButtonStyle(),
+                      child: Text('.'),
                     ),
-                  ),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.lightGreen,
                         shape: StadiumBorder(),
-                        side: BorderSide(color: Colors.black)),
-                    onPressed: () {},
-                    child: Text('.'),
-                  ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.lightGreen,
-                      shape: StadiumBorder(),
+                      ),
+                      onPressed: submit,
+                      child: Text(
+                        '=',
+                        style: TextStyle(fontSize: 30),
+                      ),
                     ),
-                    onPressed: submit,
-                    child: Text(
-                      '=',
-                      style: TextStyle(fontSize: 30),
-                    ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ));
   }
