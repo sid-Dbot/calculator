@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import './widgets/screen.dart';
 
 void main() => runApp(Myapp());
@@ -36,21 +35,23 @@ class _CalculatorState extends State<Calculator> {
 
   void chooseOperator(String l) {
     _operatorChoosen = true;
+    print(_operatorChoosen);
     setState(() {
       _o = l;
     });
   }
 
   void numbuilder(String k) {
-    _operatorChoosen ? n1 += k : n2 += k;
+    _operatorChoosen ? n2 += k : n1 += k;
     setState(() {
-      if (_operatorChoosen == false) a = int.parse(n1);
+      a = int.parse(n1);
       b = int.parse(n2);
     });
   }
 
   void add() {
     setState(() {
+      _operatorChoosen = true;
       _c = a + b;
       _o = '+';
     });
@@ -58,6 +59,7 @@ class _CalculatorState extends State<Calculator> {
 
   void subtract() {
     setState(() {
+      _operatorChoosen = true;
       _c = a - b;
       _o = '-';
     });
@@ -65,6 +67,7 @@ class _CalculatorState extends State<Calculator> {
 
   void multiply() {
     setState(() {
+      _operatorChoosen = true;
       _c = a * b;
       _o = '*';
     });
@@ -72,6 +75,7 @@ class _CalculatorState extends State<Calculator> {
 
   void divide() {
     setState(() {
+      _operatorChoosen = true;
       a > b ? _c = a / b : _c = b / a;
       _o = '/';
     });
@@ -82,17 +86,18 @@ class _CalculatorState extends State<Calculator> {
       _c = 0;
       _o = "";
       n1 = '';
+      n2 = '';
       a = 0;
       b = 0;
+      _operatorChoosen = false;
     });
   }
 
-  // void submit() {
-  //   setState(() {
-  //     a = int.parse(n1);
-  //     b = int.parse(num2.text);
-  //   });
-  // }
+  void submit() {
+    print(n1);
+    print(_operatorChoosen);
+    print(n2);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +157,7 @@ class _CalculatorState extends State<Calculator> {
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: () => chooseOperator('+'),
+                      onPressed: () => add(),
                       child: Icon(Icons.add)),
                 ],
               ),
@@ -184,7 +189,7 @@ class _CalculatorState extends State<Calculator> {
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(side: BorderSide(width: 10)),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: () => chooseOperator('-'),
+                      onPressed: () => subtract(),
                       child: Text(
                         "-",
                         style: TextStyle(fontSize: 20),
@@ -219,7 +224,7 @@ class _CalculatorState extends State<Calculator> {
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: () => chooseOperator('X'),
+                      onPressed: () => multiply(),
                       child: Text(
                         'X',
                         style: TextStyle(fontSize: 20),
@@ -255,7 +260,7 @@ class _CalculatorState extends State<Calculator> {
                       style: OutlinedButton.styleFrom(
                           shape: StadiumBorder(),
                           side: BorderSide(color: Colors.black)),
-                      onPressed: () => chooseOperator("/"),
+                      onPressed: () => divide(),
                       child: Text('/', style: TextStyle(fontSize: 20))),
                 ],
               ),
@@ -282,7 +287,7 @@ class _CalculatorState extends State<Calculator> {
                       backgroundColor: Colors.lightGreen,
                       shape: StadiumBorder(),
                     ),
-                    onPressed: () {},
+                    onPressed: submit,
                     child: Text(
                       '=',
                       style: TextStyle(fontSize: 30),
