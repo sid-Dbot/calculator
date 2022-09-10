@@ -45,7 +45,7 @@ class _CalculatorState extends State<Calculator> {
     _operatorChoosen ? n2 += k : n1 += k;
     setState(() {
       a = int.parse(n1);
-      b = int.parse(n2);
+      // b = int.parse(n2);
     });
   }
 
