@@ -44,8 +44,7 @@ class _CalculatorState extends State<Calculator> {
   void numbuilder(String k) {
     _operatorChoosen ? n2 += k : n1 += k;
     setState(() {
-      a = int.parse(n1);
-      // b = int.parse(n2);
+      _operatorChoosen ? b = int.parse(n2) : a = int.parse(n1);
     });
   }
 
